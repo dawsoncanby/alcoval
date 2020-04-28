@@ -1,19 +1,26 @@
 <template>
-  <div>
-    <h3>AlcoVal</h3>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <add-drink/>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import AddDrink from './AddDrink.vue'
+
 export default {
-  name: 'HelloWorld',
+  components: {
+    AddDrink
+  },
+  
   props: {
-    msg: String
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>
