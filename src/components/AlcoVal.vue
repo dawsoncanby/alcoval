@@ -29,9 +29,10 @@ export default {
 
   data: () => ({
     tableFields: [
-      { text: 'Name', value: 'name'},
-      { text: 'Price', value: 'price'},
-      { text: 'Cost of Drink', value: 'costOfDrink'},
+      { text: 'Name', value: 'name' },
+      { text: 'Price', value: 'price' },
+      { text: 'Total Drinks', value: 'totalDrinks' },
+      { text: 'Cost of Drink', value: 'costOfDrink' },
     ],
     addedDrinks: []
   })

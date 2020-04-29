@@ -49,7 +49,8 @@
         </v-form>
         <!-- summary if all required data is there -->
         <div v-if="costOfDrink !== null">
-          <h3 >${{ costOfDrink.toFixed(2) }} per drink</h3>
+          <h3>{{ totalDrinks }} drinks</h3>
+          <h3>${{ costOfDrink }} per drink</h3>
         </div>
       </v-card-text>
     <v-card-actions>
@@ -135,18 +136,20 @@ export default {
       // how much pure alcohol is in this drink
       const pureAlc = ml * this.pct / 100
       // how many total standard drinks in this item
-      return pureAlc / oneDrink
+      return (pureAlc / oneDrink).toFixed(2)
     },
     // cost of one standard drink in item
     costOfDrink() {
       if (this.totalDrinks === null) return null
       // total cost / total drinks = price per drink
-      return this.price / this.totalDrinks
+      // TODO: leave this as a float and format later
+      return (this.price / this.totalDrinks).toFixed(2)
     }
   },
 
   watch: {
     type(val) {
+      if (val === null) return 
       this.pct = val.pct
       this.availableQuantities = val.quantities
       this.quantity = null
@@ -156,11 +159,19 @@ export default {
   methods: {
     // user clicked add drink button
     drinkAdded() {
+      // tell app that drink has been added
       this.$emit('drink-added', {
         name: this.name,
         price: this.price,
+        totalDrinks: this.totalDrinks,
         costOfDrink: this.costOfDrink,
       })
+      // clear fields
+      this.name = null
+      this.price = null
+      this.pct = null
+      this.quantity = null
+      this.type = null
     },
   },
 }
